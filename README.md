@@ -1,3 +1,3 @@
 # prueba-scm
 
-pruebaaaaaaaaa
+prueba
