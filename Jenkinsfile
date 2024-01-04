@@ -1,9 +1,6 @@
 pipeline {
     agent any
     
-    triggers {
-        githubPush() // Activa la ejecución de la pipeline cuando Jenkins recibe un webhook de GitHub
-    }
     tools {
         jfrog 'jfrog-cli'
     }
