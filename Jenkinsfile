@@ -32,7 +32,7 @@ pipeline {
                     mkdir "%WORKSPACE%\\APIManager\\target"
                     setlocal enabledelayedexpansion
                     set "projectsToAdd="
-                    for /D %%i in ("%WORKSPACE%\\prueba*") do (
+                    for /D %%i in ("%WORKSPACE%\\poc*") do (
                         set "projectsToAdd=!projectsToAdd! "%%i""
                     )
                     projpack.bat --create --passphrase-none --name deployPack --type fed --add !projectsToAdd! --projpass-none --dir "%WORKSPACE%\\APIManager\\target"
