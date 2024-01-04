@@ -6,9 +6,12 @@ pipeline {
     }
     
     stages {
-        checkout scmGit(
-    branches: [[name: 'main']],
-    userRemoteConfigs: [[url: 'https://github.com/cristopherpds/prueba-scm.git']])
+        stage('Checkout') {
+            steps {
+                // Utiliza la función checkout para obtener el código del repositorio
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/cristopherpds/prueba-scm.git']]])
+            }
+        }
         
         stage('Build Packaging') {
             steps {
