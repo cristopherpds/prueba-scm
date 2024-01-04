@@ -6,7 +6,7 @@ pipeline {
     }
     
     stages {
-        stage('Preparation: Clone or Pull Git repo') {
+        /*stage('Preparation: Clone or Pull Git repo') {
             steps {
                 script {
                     def folderPath = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\${JOB_NAME}\\apim-projects"
@@ -23,7 +23,7 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
 
         stage('Build Packaging') {
             steps {
@@ -32,20 +32,12 @@ pipeline {
                     mkdir "%WORKSPACE%\\APIManager\\target"
                     setlocal enabledelayedexpansion
                     set "projectsToAdd="
-                    for /D %%i in ("%WORKSPACE%\\apim-projects\\*") do (
+                    for /D %%i in ("%WORKSPACE%\\prueba*") do (
                         set "projectsToAdd=!projectsToAdd! "%%i""
                     )
                     projpack.bat --create --passphrase-none --name deployPack --type fed --add !projectsToAdd! --projpass-none --dir "%WORKSPACE%\\APIManager\\target"
                     '''
                 }
-            }
-        }
-        
-        stage('Publish to Artifactory') {
-            steps {
-                jf 'rt u APIManager\\target\\*.* api-management-poc-repository'
-                jf 'rt bp'
-
             }
         }
     }
