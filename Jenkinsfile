@@ -6,11 +6,9 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
+        checkout scmGit(
+    branches: [[name: 'main']],
+    userRemoteConfigs: [[url: 'https://github.com/cristopherpds/prueba-scm.git']])
         
         stage('Build Packaging') {
             steps {
