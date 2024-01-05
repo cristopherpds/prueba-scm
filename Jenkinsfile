@@ -1,31 +1,11 @@
 pipeline {
     agent any
-    options {
-    skipDefaultCheckout true
-  }
     tools {
         jfrog 'jfrog-cli'
     }
     
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    def customDir = "%WORKSPACE%\\apim-projects"
-
-                    if (!fileExists(customDir)) {
-                        checkout([$class: 'GitSCM',
-                            branches: [[name: '*/main']],
-                            userRemoteConfigs: [[url: 'https://github.com/cristopherpds/prueba-scm.git']]])
-                    } else {
-                        dir(customDir) {
-                            git branch: 'main', url: 'https://github.com/cristopherpds/prueba-scm.git'
-                        }
-                    }
-                }
-            }
-        }
-        /*stage('Preparation: Clone or Pull Git repo') {
+        stage('Preparation: Clone or Pull Git repo') {
             steps {
                 script {
                     def folderPath = "C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\${JOB_NAME}\\apim-projects"
@@ -42,7 +22,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
         stage('Build Packaging') {
             steps {
