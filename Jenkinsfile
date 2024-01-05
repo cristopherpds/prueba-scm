@@ -1,11 +1,31 @@
 pipeline {
     agent any
-
+    options {
+    skipDefaultCheckout true
+  }
     tools {
         jfrog 'jfrog-cli'
     }
     
     stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Ruta específica para clonar el repositorio
+                    def customDir = "%WORKSPACE%\\apim-projects"
+                    // Si la carpeta no existe, clona el repositorio en la ruta específica
+                    if (!fileExists(customDir)) {
+                        checkout([$class: 'GitSCM',
+                            branches: [[name: '*/main']],
+                            userRemoteConfigs: [[url: 'https://github.com/cristopherpds/prueba-scm.git']]])
+                    } else {
+                        // Si la carpeta existe, simplemente actualiza el repositorio
+                        dir(customDir) {
+                            git branch: 'main', url: 'https://github.com/cristopherpds/prueba-scm.git'
+                        }
+                    }
+                }
+            }
         /*stage('Preparation: Clone or Pull Git repo') {
             steps {
                 script {
