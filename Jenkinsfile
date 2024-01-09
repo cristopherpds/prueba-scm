@@ -23,7 +23,7 @@ pipeline {
 
         stage('Exec Maven commands') {
             steps {
-                dir('maven-examples/maven-example') {
+                dir('C:\ProgramData\Jenkins\.jenkins\workspace\prueba-apim-build\APIManager\target') {
                     // Configure Maven project's repositories
                     jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
 
