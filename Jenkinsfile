@@ -21,21 +21,11 @@ pipeline {
             }
         }
 
-        stage('Exec Maven commands') {
+         stage('Publish to Artifactory') {
             steps {
-                dir('C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\prueba-apim-build\\APIManager\\target') {
-                    // Configure Maven project's repositories
-                    jf 'mvn-config --repo-resolve-releases libs-release --repo-resolve-snapshots libs-snapshots --repo-deploy-releases libs-release-local --repo-deploy-snapshots libs-snapshot-local'
+                jf 'rt u APIManager\\target\\*.* prueba-scm'
+                jf 'rt bp'
 
-                    // Install and publish project
-                    jf 'mvn clean install'
-                }
-            }
-        }
-
-        stage('Publish build info') {
-            steps {
-                jf 'rt build-publish'
             }
         }
 
