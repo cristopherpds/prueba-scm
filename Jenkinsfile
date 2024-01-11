@@ -26,7 +26,7 @@ stage('Publish to Artifactory') {
             jf 'rt u APIManager\\target\\*.* test-local'
             jf 'rt bp'
             // Añadir propiedad de versión
-            jf 'rt sp "test-local/APIManager/target/deployPack.fed" "build.number=%BUILD_NUMBER%"'
+            jf 'rt sp test-local/APIManager/target/deployPack.fed build.number=%BUILD_NUMBER%'
         }
     }
 }
