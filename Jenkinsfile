@@ -20,7 +20,7 @@ pipeline {
                 }
             }
         }
-        stage('Publish to Artifactory') {
+stage('Publish to Artifactory') {
     steps {
         script {
             jf 'rt u APIManager\\target\\*.* test-local'
@@ -30,6 +30,7 @@ pipeline {
         }
     }
 }
+
 
 
          /*stage('Publish to Artifactory') {
