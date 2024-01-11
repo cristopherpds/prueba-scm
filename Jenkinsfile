@@ -26,7 +26,7 @@ pipeline {
             jf 'rt u APIManager\\target\\*.* test-local'
             jf 'rt bp'
             // Añadir propiedad de versión
-            jf 'rt sp --props build.number=%BUILD_NUMBER% test-local/APIManager/target/deployPack.fed'
+            jf 'rt sp "test-local/APIManager/target/deployPack.fed" "build.number=%BUILD_NUMBER%"'
         }
     }
 }
