@@ -20,14 +20,25 @@ pipeline {
                 }
             }
         }
+        stage('Publish to Artifactory') {
+    steps {
+        script {
+            jf 'rt u APIManager\\target\\*.* test-local'
+            jf 'rt bp'
+            // Añadir propiedad de versión
+            jf 'rt sp --props build.number=%BUILD_NUMBER% test-local/APIManager/target/deployPack.fed'
+        }
+    }
+}
 
-         stage('Publish to Artifactory') {
+
+         /*stage('Publish to Artifactory') {
             steps {
                 jf 'rt u APIManager\\target\\*.* prueba-scm'
                 jf 'rt bp'
 
             }
-        }
+        }*/
 
     }
 }
