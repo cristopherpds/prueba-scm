@@ -24,11 +24,16 @@ pipeline {
 
          stage('Publish to Artifactory') {
             steps {
-                jf 'rt u APIManager\\target\\*.* artifactory-fed-poc-local'
+                jf 'rt u APIManager\\target\\*.* prueba-scm-generic-local'
                 jf 'rt bp'
 
             }
         }
+        post{
+           script {
+            slackSend channel: "#channel-name", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+            }
 
+         }
     }
 }
