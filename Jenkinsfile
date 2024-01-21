@@ -34,7 +34,7 @@ pipeline {
     post{
            always {
                script {
-            slackSend channel: "#channel-name", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
+            slackSend channel: "#perceptiva", message: "Build Started: ${env.JOB_NAME} ${env.BUILD_NUMBER}"
             }
             }
 
